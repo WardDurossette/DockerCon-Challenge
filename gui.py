@@ -112,11 +112,9 @@ def callback():
     print "end"
 
     # Opens output image in image viewer
-    # jsonStr2 = '{"script": "#!/bin/bash \\n eog \'%OI%\'"}'.replace('%OI%', oi)
-    # j2 = json.loads(jsonStr2)
-    # subprocess.call(j2['script'], shell=True)
-
-    # tk.tkMessageBox.showinfo("Your image was saved locally!")
+    jsonStr2 = '{"script": "#!/bin/bash \\n eog \'%OI%\'"}'.replace('%OI%', oi)
+    j2 = json.loads(jsonStr2)
+    subprocess.call(j2['script'], shell=True)
 
 # Enter button that initiates callback
 enter = tk.Button(top, text="Enter", width=10, command=callback)
