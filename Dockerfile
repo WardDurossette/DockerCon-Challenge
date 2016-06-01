@@ -7,5 +7,4 @@ RUN apt-get install -y python-tk
 RUN apt-get install -y eog
 
 ADD gui.py /root/neural-style/
-ENTRYPOINT ["/usr/bin/python"]
-CMD ["gui.py"]
+
