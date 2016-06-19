@@ -1,0 +1,41 @@
+How I got this to work on my Mac. 
+
+I follow @jessfraz on Twitter, and saw a talk by her on YouTube in which she had X11 windows running, so I thought that might be a good place to start.
+
+Willy Wonka of Containers - Jessie Frazelle:  https://www.youtube.com/watch?v=GsLZz8cZCzc
+
+Googled “jessfraz X11 mount”, read her blog post here: https://blog.jessfraz.com/post/docker-containers-on-the-desktop/ 
+
+In that post she refers to tricks to get it to work on Mac, with a link located here: https://github.com/docker/docker/issues/8710
+
+
+What worked:
+
+
+(Pre-game warmup - Update brew and brew cask) 
+* brew update (already had brew installed from my dotNet core stuff.
+* Had to install cask - brew install brew-cask
+
+— commands I ran from a terminal window
+
+— install socat
+brew install socat
+
+--install xquartz
+brew cask install xquartz
+
+--<reboot - because the DISPLAY environment variable was not set>
+
+--open Quartz server
+open -a XQuartz
+
+--start a socat session
+socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
+
+--in another (second terminal window) window
+--use ifconfig to find out the IP address of the VirtualBox
+ifconfig ( look for the IP address associated with vboxnet0 )
+
+--run the container, setting the DISPLAY to the IP
+ docker run -it -e DISPLAY=192.168.99.1:0 dorakorpar/nsgui
+
